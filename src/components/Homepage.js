@@ -18,7 +18,7 @@ class Homepage extends Component{
 	
 
 	render() {
-      
+		document.querySelector('body').style.backgroundColor = "white";
           
 		    return (
 
