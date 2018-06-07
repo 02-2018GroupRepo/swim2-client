@@ -5,165 +5,84 @@ import { FormGroup, Col, Panel, Radio } from 'react-bootstrap';
 import $ from 'jquery';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import { Button } from 'react-bootstrap';
+import { url } from '../config';
 
 class RecieveASN extends Component{
-	
 
-state = {
-    checked: true,
-   
-  };
+    constructor(props){
+        super(props);
+        this.state ={
+            asns: [],
+            checked: true
+        }
+    }
 
-  onChange(check) {
-    this.setState({checked: check.target.checked});
-  }
+    componentDidMount(){
+        axios.get(`${url}/api/asns`)
+        .then(res => res.data)
+        .then(
+          (data) => {  
+            this.setState({
+                asns: data
+             });
+           },
+           (error) => {
+             this.setState({
+               asns: []
+             })
+           }
+         )
+    }
 
-    // const recievingRequest = axios({
-    //   method: "POST",
-    //   url: `${url}/login`,
-    //   data: {
+ onChange(check) {
+   this.setState({checked: check.target.checked});
+ }
+
+    render() {
+    	document.querySelector('body').style.backgroundColor = "white";
+       
         
-    //   }
-    // });
 
-		
-	
+        console.log(this.state.asns);
+           const asnReturn = this.state.asns.map((aASN,index)=>{
+         return( <Panel id="collapsible-panel-example-3">
+         <Panel.Heading>
+           <Panel.Title>ASN Number</Panel.Title>
+           <Panel.Toggle componentClass="a">{aASN.asn}</Panel.Toggle>
+         </Panel.Heading>
 
-	render() {
-
-      
-          
-		    return (
-		      <div>
-		       
-		         <Panel id="collapsible-panel-example-3" >
-		          <Panel.Heading>
-		            <Panel.Title>ASN Number</Panel.Title>
-		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>
-		          </Panel.Heading>
-		          <Panel.Collapse>
-		            <Panel.Body>
-		                  <ul> 
-		                       <li>Asn Id: </li>
-		                       <li>Vendor id: </li>
-		                       <li>Expected Arrival Date: </li>
-		                        <li> Expect Arriaval Time: </li>
-		                        <li> Serial Number :
-		                         <CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456781
-
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456782
-									      
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456783
-									      
-									</CheckboxGroup>  
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456784
-									      
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456785
-									      
-									</CheckboxGroup>  
-     		    
-								</li>
-		                    </ul>
-
-		            </Panel.Body>
-		          </Panel.Collapse>
-		           </Panel>
-		           <Panel id="collapsible-panel-example-3">
-		           <Panel.Heading>
-		            <Panel.Title>ASN Number</Panel.Title>
-		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>
-		          </Panel.Heading>
-		          <Panel.Collapse>
-		            <Panel.Body>
-		                  <ul> 
-		                       <li>Asn Id: </li>
-		                       <li>Vendor id: </li>
-		                       <li>Expected Arrival Date: </li>
-		                        <li> Expect Arriaval Time: </li>
-		                        <li> Serial Number :
-		                          <CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456781
-
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456782
-									      
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456783
-									      
-									</CheckboxGroup>  
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456784
-									      
-									</CheckboxGroup> 
-									<CheckboxGroup>
-								     <Checkbox
-									        label="Click me"
-									        checked={this.state.checked}
-									        onChange={this.onChange.bind(this)}
-									      />  123456785
-									      
-									</CheckboxGroup>  
- 
-
-
-		                         </li>
-		                       </ul>
-
-		            </Panel.Body>
-		          </Panel.Collapse>
-		        </Panel>
-		        </div>
-		        )
+         <Panel.Collapse>
+           <Panel.Body>                  
+                  <ul>                
+                      <li>Expected Arrival Date:{aASN.expectedArrivalDate} </li>
+                      <li>Expect Arriaval Time: {aASN.expectedArrivalTime}</li>
+                      <li>Serial Number: {aASN.serials.map((aSerial, index)=>{
+                              return(
+                                  <li>
+                                      <CheckboxGroup>
+                                         <Checkbox
+                                            label="Click me"
+                                            checked={this.state.checked}
+                                            onChange={this.onChange.bind(this)}
+                                          />  {aSerial.serial}
+                                    </CheckboxGroup>
+                                </li>
+                            )
+                       })
+                         }
+                        </li>
+                      </ul>
+           </Panel.Body>
+         </Panel.Collapse>
+         </Panel>
+         )
+         })            
+       return (                            
+             <div>
+                  {asnReturn}                  
+            </div>
+       )
 }
-
-
 }
 
 export default RecieveASN;
-
