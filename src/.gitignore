@@ -1,0 +1,15 @@
+.classpath
+
+.project
+
+.settings/
+ node_modules/
+   src/.gitignore
+
+
+
+application.properties
+
+target/
+*node_modules/*
+*package-lock*

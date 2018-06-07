@@ -25,7 +25,7 @@ class Homepage extends Component{
 		      <div>
 		        
 
-		         <Panel id="collapsible-panel-example-3" defaultExpanded>
+		         <Panel id="collapsible-panel-example-3">
 		          <Panel.Heading>
 		            <Panel.Title>ASN Number</Panel.Title>
 		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>
@@ -43,7 +43,7 @@ class Homepage extends Component{
 		            </Panel.Body>
 		          </Panel.Collapse>
 		          </Panel>
-		           <Panel id="collapsible-panel-example-3" defaultExpanded>
+		           <Panel id="collapsible-panel-example-3">
 		           <Panel.Heading>
 		            <Panel.Title>ASN Number</Panel.Title>
 		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>

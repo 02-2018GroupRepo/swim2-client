@@ -4,16 +4,27 @@ import axios from 'axios';
 import { FormGroup, Col, Panel, Radio } from 'react-bootstrap';
 import $ from 'jquery';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
+import { Button } from 'react-bootstrap';
 
 class RecieveASN extends Component{
+	
 
 state = {
-    checked: true
+    checked: true,
+   
   };
 
   onChange(check) {
     this.setState({checked: check.target.checked});
   }
+
+    // const recievingRequest = axios({
+    //   method: "POST",
+    //   url: `${url}/login`,
+    //   data: {
+        
+    //   }
+    // });
 
 		
 	
@@ -24,7 +35,8 @@ state = {
           
 		    return (
 		      <div>
-		         <Panel id="collapsible-panel-example-3" defaultExpanded>
+		       
+		         <Panel id="collapsible-panel-example-3" >
 		          <Panel.Heading>
 		            <Panel.Title>ASN Number</Panel.Title>
 		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>
@@ -84,7 +96,7 @@ state = {
 		            </Panel.Body>
 		          </Panel.Collapse>
 		           </Panel>
-		           <Panel id="collapsible-panel-example-3" defaultExpanded>
+		           <Panel id="collapsible-panel-example-3">
 		           <Panel.Heading>
 		            <Panel.Title>ASN Number</Panel.Title>
 		            <Panel.Toggle componentClass="a">ASN</Panel.Toggle>
