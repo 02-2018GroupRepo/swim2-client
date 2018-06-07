@@ -10,58 +10,58 @@ class Login extends Component{
 		this.handlelogin = this.handlelogin.bind(this);
 	}
 	handlelogin(event){
-    event.preventDefault();
+        event.preventDefault();
 
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
 
-    const loginRequest = axios({
-      method: "POST",
-      url: `${url}/login`,
-      data: {
-        username,
-        password
-      }
+        const loginRequest = axios({
+          method: "POST",
+          url: `${url}/login`,
+          data: {
+            username,
+            password
+        }
     });
 
-    loginRequest.then((loginData)=>{
-    	if (loginData.data.role !== "invalid"){
-    		localStorage.setItem('role', loginData.data.role);
-    		this.props._isAuthHandler();
-    		this.props.props.history.push('/homepage');
-    	} else {
-				alert("invalid password");
-			}
+        loginRequest.then((loginData)=>{
+           if (loginData.data.role !== "invalid"){
+              localStorage.setItem('role', loginData.data.role);
+              this.props._isAuthHandler();
+              this.props.props.history.push('/homepage');
+          } else {
+            alert("invalid password");
+        }
     })
 
-}
+    }
 
-render(){
+    render(){
 
-	const h1Styles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "36px"};
-	const paragraphStyles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "15px"}    
-	document.querySelector('body').style.backgroundColor = "#00A2FF";
-	return( 
-	 <div className="container-fluid">
-	 <div className="icon">
-	 		<i className="fas fa-warehouse"></i>
-    </div>
-		<h1 style={h1Styles}>SWIM</h1>
-    <p style={paragraphStyles}>Integrated Warehouse Management System</p>
-		<form onSubmit ={this.handlelogin} className="sign-in">
-		  <div className="email">
-		        <input type="text" placeholder="Email" className ="form-control" id ="username"/>
-		      </div>
-		   <div className ="password">
-		        <input type="password" placeholder="Password" className ="form-control" id ="password"/>
-		        </div>
-					<button type="submit">Log in</button>
-		   <div className ="signup">
-                    {/* <Link to="/signup">Click here to Sign Up.</Link>  */}
-           </div>
+       const h1Styles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "36px"};
+       const paragraphStyles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "15px"}    
+       document.querySelector('body').style.backgroundColor = "#00A2FF";
+       return( 
+          <div className="container-fluid">
+          <div className="icon">
+          <i className="fas fa-warehouse"></i>
+          </div>
+          <h1 style={h1Styles}>SWIM</h1>
+          <p style={paragraphStyles}>Integrated Warehouse Management System</p>
+          <form onSubmit ={this.handlelogin} className="sign-in">
+          <div className="email">
+          <input type="text" placeholder="Email" className ="form-control" id ="username"/>
+          </div>
+          <div className ="password">
+          <input type="password" placeholder="Password" className ="form-control" id ="password"/>
+          </div>
+          <button type="submit">Log in</button>
+          <div className ="signup">
+      {/* <Link to="/signup">Click here to Sign Up.</Link>  */}
+      </div>
 
-		   </form>
-		   </div>
+      </form>
+      </div>
       )
    }
 }
@@ -81,4 +81,4 @@ export default Login;
                         
                                 <button type="submit" data-submit="">Log in</button>
     
-                        </form></div> */}
+                            </form></div> */}

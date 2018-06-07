@@ -23,7 +23,8 @@ class App extends Component {
       isAuth: auth
     })
   }    
-      
+     
+
   render() {
     return (
              <Router>

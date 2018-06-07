@@ -15,17 +15,17 @@ class Header extends Component{
 	render(){
 		return(
 			<div className="row">
-				<div className="row title123">
-					<div className="col-md-6 hdlogo123">
-						
-						<p className="textStyle">Integrated Warehouse Management System</p>
+			<div className="row title123">
+			<div className="col-md-6 hdlogo123">
+			
+			<p className="textStyle">Integrated Warehouse Management System</p>
 
-					</div>
-					<div className="col-md-offset-1 col-md-5 navAndSearch123">
-						<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />
-					</div>
-				</div>
-				
+			</div>
+			<div className="col-md-offset-1 col-md-5 navAndSearch123">
+			<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />
+			</div>
+			</div>
+			
 			</div>
 			)
 	}
