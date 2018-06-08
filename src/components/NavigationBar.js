@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-
+import dockdoorModal from '../components/dockdoorModal';
 
 class NavigationBar extends Component{
 
@@ -17,9 +17,10 @@ class NavigationBar extends Component{
   _isAuthorized() {
     if (this.state.isAuth) {
       return (<React.Fragment> 
-        <Link to="/recieveasn">Receiving</Link>
+        <Link to="/recieveasn" >Receiving</Link>
         <Link to="/recieveasn">Shipping</Link>
         <Link to="/" onClick={this._logout}>Logout</Link>
+
         </React.Fragment>)
     } else {
       return (<React.Fragment>
@@ -36,6 +37,7 @@ class NavigationBar extends Component{
       isAuth: false
     })
   }
+   
 
 
   render(){

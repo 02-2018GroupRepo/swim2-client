@@ -7,6 +7,7 @@ import SignUp from './components/SignUp';
 import Homepage from './components/Homepage';
 import RecieveASN from './components/RecieveASN';
 import Searchbar from './components/Searchbar';
+import dockdoorModal from './components/dockdoorModal';
 import NavigationBar from './components/NavigationBar';
 
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
@@ -41,8 +42,9 @@ class App extends Component {
              <Route path='/login' component={(props) => <Login props={props} _isAuthHandler={this._isAuthHandler} /> }/>
               <Route path='/signup' component={(props) => <SignUp props={props} _isAuthHandler={this._isAuthHandler} />} />
               <Route path='/homepage'  component={Homepage} />
-           
-              <Route path='/recieveasn'  component={RecieveASN} />
+              
+              <Route path='/recieveasn'  component={dockdoorModal} />
+              
 
               <div class="footer">
                   <h1>Group members:</h1>
