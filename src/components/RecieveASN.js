@@ -13,6 +13,7 @@ class RecieveASN extends Component{
 		super(props);
 		this.state ={
 			asns: [],
+			dockdoor: undefined
 		}
 	}
 
@@ -46,13 +47,23 @@ class RecieveASN extends Component{
 	}
 	
 	formSubmit=(event)=>{
-		submitBox = []
 		event.preventDefault();
+		let submitBox = [];
+		let asnId = event.target.getAttribute("asn");
 		for(let i=0; i<event.target.length; i++){
 			if(event.target[i].checked){
-				console.log("yup")
+				submitBox.push(event.target[i].value);
 			}
 		}
+		axios({
+          method: "POST",
+          url: `${url}/api/submit/received/${asnId}/${this.props.dockdoor}`,
+          data: 
+          	submitBox
+          
+    	}).then(response=>{
+    		console.log(response)
+    	})
 	}
 
 
@@ -74,7 +85,7 @@ class RecieveASN extends Component{
 				<ul>                
 				<li>Expected Arrival Date:{aASN.expectedArrivalDate} </li>
 				<li>Expect Arriaval Time: {aASN.expectedArrivalTime}</li>
-				<form onSubmit={this.formSubmit}>
+				<form onSubmit={this.formSubmit} asn={aASN.asn}>
 				<li>Serial Number: {aASN.serials.map((aSerial, index)=>{
 
 					return(
