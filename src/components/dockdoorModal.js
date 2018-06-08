@@ -34,11 +34,10 @@ constructor(props){
 	}
 
   render() {
-
   	const doorNumber =this.state.dockdoor.map((aDoor, index)=>{
   		return (
        
-                     <MenuItem eventKey="1">{aDoor}</MenuItem>
+                     <MenuItem eventKey="1" onClick={()=>this.props._dropdownHandler(aDoor)}>{aDoor}</MenuItem>
                    )
 
   	})
@@ -58,6 +57,7 @@ constructor(props){
 
                    <Modal.Footer>
                         <Link to="/homepage" ><Button>Close</Button></Link>
+                          <Link to="/recieveasn" ><Button>Submit</Button></Link>
                         
                    </Modal.Footer>
                  </Modal.Dialog>

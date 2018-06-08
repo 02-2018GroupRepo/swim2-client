@@ -13,9 +13,12 @@ class Homepage extends Component{
 		super(props);
 		this.state ={
 			asns: [],
-			filteredAsns: []       
+			filteredAsns: [],
+			
+
 		}
 	}
+
 
 	componentDidMount() {
     axios.get(`${url}/api/asns`)

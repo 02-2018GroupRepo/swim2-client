@@ -38,12 +38,13 @@ class RecieveASN extends Component{
 		this.setState({checked: check.target.checked});
 	}
 
+
 	render() {
 		document.querySelector('body').style.backgroundColor = "white";
 		
 		
 
-		console.log(this.state.asns);
+		console.log(this.props.dockdoor);
 		const asnReturn = this.state.asns.map((aASN,index)=>{
 			return( <Panel id="collapsible-panel-example-3">
 				<Panel.Heading>
