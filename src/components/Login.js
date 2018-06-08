@@ -25,7 +25,7 @@ class Login extends Component{
     });
 
         loginRequest.then((loginData)=>{
-           if (loginData.data.role !== "invalid"){
+           if (loginData.data.role !== "invalid" || loginData.data.role !== "user does not exist"){
               localStorage.setItem('role', loginData.data.role);
               this.props._isAuthHandler();
               this.props.props.history.push('/homepage');
@@ -42,7 +42,7 @@ class Login extends Component{
        const paragraphStyles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "15px"}    
        document.querySelector('body').style.backgroundColor = "#00A2FF";
        return( 
-          <div className="container-fluid">
+          <div className="container-fluid" id="login-container">
           <div className="icon">
           <i className="fas fa-warehouse"></i>
           </div>

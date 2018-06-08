@@ -5,14 +5,15 @@ import { FormGroup, Col, Panel, Radio } from 'react-bootstrap';
 import $ from 'jquery';
 import NavigationBar from './NavigationBar';
 import { url } from '../config';
+import Searchbar from './Searchbar';
 class Homepage extends Component{
 
 
 	constructor(props){
 		super(props);
 		this.state ={
-			asns: []
-          
+			asns: [],
+			filteredAsns: []       
 		}
 	}
 
@@ -22,7 +23,8 @@ class Homepage extends Component{
          .then(
            (data) => {  
              this.setState({
-                 asns: data
+								 asns: data,
+								 filteredAsns: data
               });
             },
             (error) => {
@@ -33,15 +35,23 @@ class Homepage extends Component{
           ) 
 }
 
-		
-		
-	
+_searchBarHandler = (searchTerm) => {
+	const re = new RegExp(searchTerm.toString() + '.*', 'gi');
+				let filteredAsns = this.state.asns.filter(record => {
+					let asnId = Number(record.asn).toString();
+					return asnId.match(re);
+				});
+				this.setState({
+					filteredAsns
+        });
+}
+
 
 	render() {
 		document.querySelector('body').style.backgroundColor = "white";
 
-		console.log(this.state.asns);
-	   const asnReturn = this.state.asns.map((aASN,index)=>{
+		
+	   const asnReturn = this.state.filteredAsns.map((aASN,index)=>{
 		          return( <Panel id="collapsible-panel-example-3">
 		          <Panel.Heading>
 		            <Panel.Title>ASN Number</Panel.Title>
@@ -76,6 +86,7 @@ class Homepage extends Component{
 		    	   
                               
 		      <div>
+						<Searchbar _searchBarHandler={this._searchBarHandler} />
                    {asnReturn}
 		          
 		        </div>)

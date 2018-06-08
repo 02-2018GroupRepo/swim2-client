@@ -13,17 +13,15 @@ class Header extends Component{
 	}
 
 	render(){
+		const h1Styles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "36px"};
 		return(
-			<div className="row">
-			<div className="row title123">
-			<div className="col-md-6 hdlogo123">
-			
-			<p className="textStyle">Integrated Warehouse Management System</p>
-
+			<div className="row" id="header">
+			<div className="header-div">
+			<div className="header-logo">
+            <i className="fas fa-warehouse" style={{display: "block"}}></i>
+            <h1 style={h1Styles}>SWIM</h1>
 			</div>
-			<div className="col-md-offset-1 col-md-5 navAndSearch123">
 			<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />
-			</div>
 			</div>
 			
 			</div>

@@ -17,6 +17,13 @@ import axios from 'axios';
 
 class App extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      isAuth: false
+    }
+  }
+
 
   _isAuthHandler = (auth=true) => {
     this.setState({
@@ -28,13 +35,11 @@ class App extends Component {
   render() {
     return (
              <Router>
+               <React.Fragment>
+             <Route path='/homepage'  component={() => <Header isAuth={this.state.isAuth} />} />  
              <div className ="container">
              <Route path='/login' component={(props) => <Login props={props} _isAuthHandler={this._isAuthHandler} /> }/>
               <Route path='/signup' component={(props) => <SignUp props={props} _isAuthHandler={this._isAuthHandler} />} />
-                <Route path='/homepage'  component={Header} />
-             
-
-              <Route path='/homepage'  component={Searchbar} />
               <Route path='/homepage'  component={Homepage} />
            
               <Route path='/recieveasn'  component={RecieveASN} />
@@ -47,7 +52,7 @@ class App extends Component {
               </div>
               </div>
              
-
+             </React.Fragment>
              </Router>
     
     );
