@@ -12,6 +12,17 @@ class Header extends Component{
 		}
 	}
 
+	toggleDropDown = () => {
+		try {
+			const e = document.querySelector('[data-dropdown]');
+			if (e.style.display === "block") {
+				e.style.display = "none";
+			} else {
+				e.style.display = "block";
+			}
+		} catch (e) {}
+	}
+
 	render(){
 		const h1Styles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "36px"};
 		return(
@@ -21,7 +32,13 @@ class Header extends Component{
             <i className="fas fa-warehouse" style={{display: "block"}}></i>
             <h1 style={h1Styles}>SWIM</h1>
 			</div>
+			<div className="mobile-nav" onClick={this.toggleDropDown}>
+				<i class="fas fa-bars"></i>
+			</div>
 			<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />
+			</div>
+			<div className="mobile-dropdown" data-dropdown>
+			<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />	
 			</div>
 			
 			</div>

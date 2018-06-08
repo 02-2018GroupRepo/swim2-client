@@ -19,7 +19,7 @@ class SearchBar extends Component {
     return (
       <div className='searchbar-wrapper'>
       <div className="searchbar">
-        <input placeholder="Asn Number" type="text" onChange={this.searchHandler} />
+        <input placeholder="Search by Asn number" type="text" onChange={this.searchHandler} />
         </div>
             <div><i className="fas fa-search" style={iconStyle}></i></div>
       </div>

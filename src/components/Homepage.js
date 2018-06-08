@@ -65,7 +65,7 @@ _searchBarHandler = (searchTerm) => {
 		                     
 		                      
 		                       <li>Expected Arrival Date:{aASN.expectedArrivalDate} </li>
-		                       <li>Expect Arriaval Time: {aASN.expectedArrivalTime}</li>
+		                       <li>Expected Arrival Time: {aASN.expectedArrivalTime}</li>
 		                       <li>Serial Number:  {aASN.serials.map((aSerial, index)=>{
 		                       	         return(<li>{aSerial.serial}</li>)
 		                       })
@@ -85,7 +85,7 @@ _searchBarHandler = (searchTerm) => {
 		    return (
 		    	   
                               
-		      <div>
+		      <div className="container-home">
 						<Searchbar _searchBarHandler={this._searchBarHandler} />
                    {asnReturn}
 		          
