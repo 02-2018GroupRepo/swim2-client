@@ -13,9 +13,9 @@ class RecieveASN extends Component{
 		super(props);
 		this.state ={
 			asns: [],
-			checked: true
 		}
 	}
+
 
 	componentDidMount(){
 		axios.get(`${url}/api/asns`)
@@ -34,8 +34,25 @@ class RecieveASN extends Component{
 			)
 	}
 
-	onChange(check) {
-		this.setState({checked: check.target.checked});
+	onChange=(id)=> {
+		if(document.getElementById(id).getAttribute("checked")==="true"){
+		document.getElementById(id).setAttribute("checked", "false")
+
+		}else{
+			document.getElementById(id).setAttribute("checked", "true")
+
+		}	
+			
+	}
+	
+	formSubmit=(event)=>{
+		submitBox = []
+		event.preventDefault();
+		for(let i=0; i<event.target.length; i++){
+			if(event.target[i].checked){
+				console.log("yup")
+			}
+		}
 	}
 
 
@@ -57,21 +74,25 @@ class RecieveASN extends Component{
 				<ul>                
 				<li>Expected Arrival Date:{aASN.expectedArrivalDate} </li>
 				<li>Expect Arriaval Time: {aASN.expectedArrivalTime}</li>
+				<form onSubmit={this.formSubmit}>
 				<li>Serial Number: {aASN.serials.map((aSerial, index)=>{
+
 					return(
 						<li>
-						<CheckboxGroup>
-						<Checkbox
+						<input id={aASN.asn + aSerial.serial}
 						label="Click me"
-						checked={this.state.checked}
-						onChange={this.onChange.bind(this)}
+						type="checkbox"
+						value={aSerial.serial}
+						onChange={()=>this.onChange(aASN.asn + aSerial.serial)}
 						/>  {aSerial.serial}
-						</CheckboxGroup>
 						</li>
 						)
 				})
 			}
 			</li>
+			<button className='btn-primary' type="submit">Submit</button>
+			</form>
+
 			</ul>
 			</Panel.Body>
 			</Panel.Collapse>
