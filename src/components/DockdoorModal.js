@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 import { FormGroup, Col, Panel, Radio, Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
-import $ from 'jquery';
 
 import { url } from '../config';
 
@@ -45,19 +44,21 @@ constructor(props){
     return (                            
       
              <div className="static-modal">
-                 <Modal.Dialog>
-                   <Modal.Header>
-                         <Modal.Title>Select a dock door</Modal.Title>
+                 <Modal.Dialog id="modal-dialog-margin">
+                   <Modal.Header id="dockdoor-modal-header">
+                         <Modal.Title>Receiving</Modal.Title>
                    </Modal.Header>
 
                    <Modal.Body>
-
-                    <DropdownButton>{doorNumber}</DropdownButton>
+                     <div className="dockdoor-dropdown" id="dockdoor-modal-dropdown">
+                     <div className="dockdoor-dropdown-search">test</div>
+                     <DropdownButton>{doorNumber}</DropdownButton>
+                       </div>
                    </Modal.Body>
 
                    <Modal.Footer>
-                        <Link to="/homepage" ><Button>Close</Button></Link>
-                          <Link to="/recieveasn" ><Button>Submit</Button></Link>
+                        <Link to="/homepage"><Button style={{marginRight: "10px"}} className="btn btn-danger">Cancel</Button></Link>
+                          <Link to="/recieveasn" ><Button className="btn btn-success">Submit</Button></Link>
                         
                    </Modal.Footer>
                  </Modal.Dialog>

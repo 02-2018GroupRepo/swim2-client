@@ -29,7 +29,7 @@ class Header extends Component{
 			<div className="row" id="header">
 			<div className="header-div">
 			<div className="header-logo">
-            <i className="fas fa-warehouse" style={{display: "block"}}></i>
+            <Link to="/homepage"><i className="fas fa-warehouse" style={{display: "block"}}></i></Link>
             <h1 style={h1Styles}>SWIM</h1>
 			</div>
 			<div className="mobile-nav" onClick={this.toggleDropDown}>

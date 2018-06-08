@@ -46,7 +46,7 @@ class App extends Component {
     return (
              <Router>
                <React.Fragment>
-             <Route path='/homepage'  component={() => <Header isAuth={this.state.isAuth} />} />  
+             <Route path='/'  component={(props) => props.location.pathname !== "/login" && <Header isAuth={this.state.isAuth} />} />  
              <div className ="container">
              <Route path='/login' component={(props) => <Login props={props} _isAuthHandler={this._isAuthHandler} /> }/>
               <Route path='/signup' component={(props) => <SignUp props={props} _isAuthHandler={this._isAuthHandler} />} />

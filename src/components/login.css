@@ -44,8 +44,7 @@ html {
     width: 75%;
   }
   
-  .sign-in button, 
-  button:focus {
+  .sign-in button  {
     background-color: #00a2ff;
     box-shadow:0 4px 16px rgba(0,0,0,.2);
     width: 100px;

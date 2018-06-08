@@ -5,6 +5,7 @@ import { FormGroup, Col, Panel, Radio } from 'react-bootstrap';
 import $ from 'jquery';
 import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
 import { Button } from 'react-bootstrap';
+import swal from 'sweetalert';
 import { url } from '../config';
 
 class RecieveASN extends Component{
@@ -55,24 +56,26 @@ class RecieveASN extends Component{
 				submitBox.push(event.target[i].value);
 			}
 		}
-		axios({
-          method: "POST",
-          url: `${url}/api/submit/received/${asnId}/${this.props.dockdoor}`,
-          data: 
-          	submitBox
-          
-    	}).then(response=>{
-    		console.log(response)
-    	})
+
+		if (submitBox.length === 0) {
+			swal("Error", "Please select a serial number", "error");
+		} else {
+			axios({
+				method: "POST",
+				url: `${url}/api/submit/received/${asnId}/${this.props.dockdoor}`,
+				data: 
+					submitBox
+				
+			  }).then(response=>{
+				  swal("Success", "Form Submitted!", "success");
+			  })
+		}
 	}
 
 
 	render() {
 		document.querySelector('body').style.backgroundColor = "white";
 		
-		
-
-		console.log(this.props.dockdoor);
 		const asnReturn = this.state.asns.map((aASN,index)=>{
 			return( <Panel id="collapsible-panel-example-3">
 				<Panel.Heading>
