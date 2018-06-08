@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import dockdoorModal from '../components/dockdoorModal';
+import dockdoorModal from '../components/DockdoorModal';
 
 class NavigationBar extends Component{
 

@@ -7,7 +7,7 @@ import $ from 'jquery';
 
 import { url } from '../config';
 
-class dockdoorModal extends Component{
+class DockdoorModal extends Component{
 constructor(props){
 		super(props);
 		this.state ={
@@ -68,4 +68,4 @@ constructor(props){
   }
 }
 
-export default dockdoorModal;
+export default DockdoorModal;
