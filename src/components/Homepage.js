@@ -65,11 +65,13 @@ formatDate = (expectedDate) => {
 }
 
 formatStatus = (status) => {
-
 	return `${status[0].toUpperCase()}${status.substring(1)}`;
+}
 
-
-
+formatSerialStatus = (product) => {
+	return product.delivered ? "Delivered" 
+													 : product.received ? "Received" 
+													 									  : "In-transit"
 }
 
 
@@ -100,12 +102,15 @@ formatStatus = (status) => {
 									<thead>
 										<tr>
 											<th>Serial #</th>
+											<th>Status</th>
 										</tr>	
 										</thead>
 										<tbody>
                    {aASN.serials.map((aSerial, index)=>{
+										 console.log(aSerial)
 														 			return (<tr>
 																		 <td>{aSerial.serial}</td>
+																		 <td>{this.formatSerialStatus(aSerial)}</td>
 																	 </tr>)	 
 													 })}
 									 </tbody>

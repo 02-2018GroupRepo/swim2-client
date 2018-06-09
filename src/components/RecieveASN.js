@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import { Panel } from 'react-bootstrap';
+import { Panel, Table } from 'react-bootstrap';
 import swal from 'sweetalert';
 import { url } from '../config';
+import Searchbar from './Searchbar';
 
 class RecieveASN extends Component{
 
@@ -10,7 +11,8 @@ class RecieveASN extends Component{
 		super(props);
 		this.state ={
 			asns: [],
-			dockdoor: undefined
+			dockdoor: undefined,
+			filteredAsns: []
 		}
 	}
 
@@ -21,7 +23,8 @@ class RecieveASN extends Component{
 		.then(
 			(data) => {  
 				this.setState({
-					asns: data
+					asns: data,
+					filteredAsns: data
 				});
 			},
 			(error) => {
@@ -30,6 +33,17 @@ class RecieveASN extends Component{
 				})
 			}
 			)
+	}
+
+	_searchBarHandler = (searchTerm) => {
+		const re = new RegExp(searchTerm.toString() + '.*', 'gi');
+					let filteredAsns = this.state.asns.filter(record => {
+						let asnId = Number(record.asn).toString();
+						return asnId.match(re);
+					});
+					this.setState({
+						filteredAsns
+			});
 	}
 
 	onChange=(id)=> {
@@ -71,46 +85,57 @@ class RecieveASN extends Component{
 
 	render() {
 		document.querySelector('body').style.backgroundColor = "white";
-		
-		const asnReturn = this.state.asns.map((aASN,index)=>{
+		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
+		const asnReturn = this.state.filteredAsns.map((aASN,index)=>{
 			return( <Panel id="collapsible-panel-example-3">
-				<Panel.Heading>
-				<Panel.Title>ASN Number</Panel.Title>
-				<Panel.Toggle componentClass="a">{aASN.asn}</Panel.Toggle>
+				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
+		            <Panel.Title style={panelTitleStyles}>
+									<h4 style={{color: "#01a2ff"}}>#{aASN.asn}</h4>
+									<div>
+									<Panel.Toggle style={{cursor: "pointer"}}	componentClass="a">Serial Numbers</Panel.Toggle>
+									</div>
+								</Panel.Title>
 				</Panel.Heading>
-
 				<Panel.Collapse>
 				<Panel.Body>                  
-				<ul>                
-				<li>Expected Arrival Date:{aASN.expectedArrivalDate} </li>
-				<li>Expect Arriaval Time: {aASN.expectedArrivalTime}</li>
 				<form onSubmit={this.formSubmit} asn={aASN.asn}>
-				<li>Serial Number: {aASN.serials.map((aSerial, index)=>{
+				<Table striped bordered condensed hover>
+									<thead>
+										<tr>
+											<th style={{width: "6%"}}>Received</th>
+											<th>Serial #</th>
+										</tr>	
+										</thead>
+										<tbody>
+				{aASN.serials.map((aSerial, index)=>{
 
 					return(
-						<li>
+						<tr>
+							<td style={{textAlign: "center"}}>
 						<input id={aASN.asn + aSerial.serial}
-						label="Click me"
 						type="checkbox"
 						value={aSerial.serial}
 						onChange={()=>this.onChange(aASN.asn + aSerial.serial)}
-						/>  {aSerial.serial}
-						</li>
+						/>  
+						</td>
+						<td>{aSerial.serial}</td>
+						</tr>
 						)
 				})
 			}
-			</li>
+			</tbody>
+			</Table>
 			<button className='btn-primary' type="submit">Submit</button>
 			</form>
 
-			</ul>
 			</Panel.Body>
 			</Panel.Collapse>
 			</Panel>
 			)
 		})            
 		return (                            
-			<div>
+			<div className="container-home">
+			<Searchbar _searchBarHandler={this._searchBarHandler} />
 			{asnReturn}                  
 			</div>
 			)
