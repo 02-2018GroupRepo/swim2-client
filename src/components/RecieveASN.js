@@ -22,10 +22,12 @@ class RecieveASN extends Component{
 		.then(res => res.data)
 		.then(
 			(data) => {  
-				this.setState({
-					asns: data,
-					filteredAsns: data
-				});
+				if (data) {
+					this.setState({
+						asns: data,
+						filteredAsns: data
+					});
+				}
 			},
 			(error) => {
 				this.setState({
@@ -104,7 +106,8 @@ class RecieveASN extends Component{
 		const tableHeaderCheckBoxStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", width: "6%", color: "rgba(77, 80, 85, 0.843)"};
 		const tableHeaderStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", color: "rgba(77, 80, 85, 0.843)"};
 		let serialAsnIdArr = [];
-		const asnReturn = this.state.filteredAsns.map((aASN,index)=>{
+		let asnFilteredByStatus = this.state.filteredAsns.filter(asn => asn.status === 'in-transit');
+		const asnReturn = asnFilteredByStatus.map((aASN,index)=>{
 			return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
