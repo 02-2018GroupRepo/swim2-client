@@ -24,6 +24,7 @@ class Login extends Component{
     });
 
         loginRequest.then((loginData)=>{
+            console.log(loginData);
            if (loginData.data.role !== "invalid" || loginData.data.role !== "user does not exist"){
               localStorage.setItem('role', loginData.data.role);
               this.props._isAuthHandler();
@@ -31,7 +32,7 @@ class Login extends Component{
           } else {
             alert("invalid password");
         }
-    })
+    }).catch(e => console.log(e));
 
     }
 
