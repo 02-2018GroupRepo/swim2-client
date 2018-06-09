@@ -5,7 +5,7 @@ import swal from 'sweetalert';
 import { url } from '../config';
 import Searchbar from './Searchbar';
 
-class RecieveASN extends Component{
+class Outbound extends Component{
 
 	constructor(props){
 		super(props);
@@ -69,14 +69,12 @@ class RecieveASN extends Component{
 				submitBox.push(event.target[i].value);
 			}
 		}
-		if (!this.props.dockdoor) {
-			swal("Error", "Please select a dock door", "error");
-		} else if (submitBox.length === 0) {
+		if (submitBox.length === 0) {
 			swal("Error", "Please select a serial number", "error");
 		} else {
 			axios({
 				method: "POST",
-				url: `${url}/api/submit/received/${asnId}/${this.props.dockdoor}`,
+				url: `${url}/api/submit/delivered/${asnId}/1`,
 				data: 
 					submitBox
 				
@@ -120,7 +118,7 @@ class RecieveASN extends Component{
 				<Table striped bordered condensed hover>
 									<thead>
 										<tr>
-											<th style={tableHeaderCheckBoxStyle}>Received</th>
+											<th style={tableHeaderCheckBoxStyle}>Loaded</th>
 											<th style={tableHeaderStyle}>Serial #</th>
 										</tr>	
 										</thead>
@@ -166,4 +164,4 @@ class RecieveASN extends Component{
 	}
 }
 
-export default RecieveASN;
+export default Outbound;

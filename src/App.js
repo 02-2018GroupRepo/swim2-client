@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Header from './components/Header';
 // import SignUp from './components/SignUp';
 import Homepage from './components/Homepage';
+import Outbound from './components/Outbound.js';
 import RecieveASN from './components/RecieveASN';
 import DockdoorModal from './components/DockdoorModal';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -49,6 +50,7 @@ class App extends Component {
               
               <Route path='/dockdoor' component={() => <DockdoorModal _dropdownHandler={this._dropdownHandler} selection={this.state.dockdoorSelection} />} />
                 <Route path='/recieveasn' component={() => <RecieveASN  dockdoor={this.state.dockdoorSelection} />} />
+                <Route path='/outbound' component={() => <Outbound />} />
 
               
 
