@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import axios from 'axios';
-import dockdoorModal from '../components/DockdoorModal';
 
 class NavigationBar extends Component{
 
@@ -24,7 +22,7 @@ class NavigationBar extends Component{
         </React.Fragment>)
     } else {
       return (<React.Fragment>
-        <Link to="/signup">Sign Up</Link>
+        {/* <Link to="/signup">Sign Up</Link> */}
         <Link to="/login">Login</Link>
         </React.Fragment>)
     }

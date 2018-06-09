@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import { url } from '../config';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
 
 class SearchBar extends Component {
   constructor (props) {

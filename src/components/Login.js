@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Link} from 'react-router-dom';
 import { url } from '../config';
 import './login.css';
 
@@ -67,18 +66,3 @@ class Login extends Component{
 }
 
 export default Login;
-
-{/* <form>
-                        <div class="email">
-                            <input type="email" name="email" placeholder="Email" data-email="" id="email-form">
-                            <h2 id="email-error" style="display: none;">Incorrect Email Format</h2>
-                            <h2 id="user-error" style="display: none;">User Not Found</h2>
-                        </div>
-                        <div class="password">
-                            <input type="password" placeholder="Password" name="password" data-password="" id="pwd-form">
-                            <h2 id="password-error" style="display: none;">Wrong Password</h2>
-                        </div>
-                        
-                                <button type="submit" data-submit="">Log in</button>
-    
-                            </form></div> */}

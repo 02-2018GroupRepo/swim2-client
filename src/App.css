@@ -141,5 +141,18 @@ h1 {
 .dockdoor-dropdown-search {
   border: 1px solid #cccccc;
   width: 220px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Russo One", sans-serif;
+}
+
+.dockdoor-dropdown-search p {
+  margin-bottom: 0px;
+  font-size: 18px;
+}
+
+.asn-status {
+  color: rgb(11, 170, 107);
 }
 

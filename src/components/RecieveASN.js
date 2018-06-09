@@ -1,10 +1,6 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { FormGroup, Col, Panel, Radio } from 'react-bootstrap';
-import $ from 'jquery';
-import {Checkbox, CheckboxGroup} from 'react-checkbox-group';
-import { Button } from 'react-bootstrap';
+import { Panel } from 'react-bootstrap';
 import swal from 'sweetalert';
 import { url } from '../config';
 

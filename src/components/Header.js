@@ -33,7 +33,7 @@ class Header extends Component{
             <h1 style={h1Styles}>SWIM</h1>
 			</div>
 			<div className="mobile-nav" onClick={this.toggleDropDown}>
-				<i class="fas fa-bars"></i>
+				<i className="fas fa-bars"></i>
 			</div>
 			<NavigationBar isAuth={this.props.isAuth} _isAuthHandler={this.props._isAuthHandler} />
 			</div>

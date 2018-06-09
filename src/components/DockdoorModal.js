@@ -2,7 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
-import { FormGroup, Col, Panel, Radio, Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
+import { Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { url } from '../config';
 
@@ -30,7 +30,13 @@ constructor(props){
 				})
 			}
 			)
-	}
+  }
+  
+  moveDropDownMenu = () => {
+    const e = document.getElementsByClassName('dropdown-menu')[0];
+    e.style.left = "-220px";
+    e.style.width = "220px";
+  }
 
   render() {
   	const doorNumber =this.state.dockdoor.map((aDoor, index)=>{
@@ -46,13 +52,13 @@ constructor(props){
              <div className="static-modal">
                  <Modal.Dialog id="modal-dialog-margin">
                    <Modal.Header id="dockdoor-modal-header">
-                         <Modal.Title>Receiving</Modal.Title>
+                         <Modal.Title>Dock Door</Modal.Title>
                    </Modal.Header>
 
                    <Modal.Body>
-                     <div className="dockdoor-dropdown" id="dockdoor-modal-dropdown">
-                     <div className="dockdoor-dropdown-search">test</div>
-                     <DropdownButton>{doorNumber}</DropdownButton>
+                     <div className="dockdoor-dropdown">
+                     <div className="dockdoor-dropdown-search"><p>{this.props.selection}</p></div>
+                     <DropdownButton onClick={() => this.moveDropDownMenu()}>{doorNumber}</DropdownButton>
                        </div>
                    </Modal.Body>
 
