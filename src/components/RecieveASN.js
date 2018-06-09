@@ -47,12 +47,14 @@ class RecieveASN extends Component{
 	}
 
 	onChange=(id)=> {
-		if(document.getElementById(id).getAttribute("checked")==="true"){
-		document.getElementById(id).setAttribute("checked", "false")
-
-		}else{
-			document.getElementById(id).setAttribute("checked", "true")
-
+		const e = document.getElementById(id);
+		const labelElement = document.querySelector(`[data-checkbox="${id}"`)
+		if(e.getAttribute("checked")==="true") {
+			e.setAttribute("checked", "false");
+			labelElement.classList.replace("fa-check-square", "fa-square");
+		} else {
+			e.setAttribute("checked", "true");
+			labelElement.classList.replace("fa-square", "fa-check-square");
 		}	
 			
 	}
@@ -62,12 +64,14 @@ class RecieveASN extends Component{
 		let submitBox = [];
 		let asnId = event.target.getAttribute("asn");
 		for(let i=0; i<event.target.length; i++){
-			if(event.target[i].checked){
+			if(event.target[i].getAttribute('checked')){
 				submitBox.push(event.target[i].value);
 			}
 		}
 
 		if (submitBox.length === 0) {
+			swal("Error", "Please select a dock door", "error");
+		} else if (!this.props.dockdoor) {
 			swal("Error", "Please select a serial number", "error");
 		} else {
 			axios({
@@ -87,7 +91,7 @@ class RecieveASN extends Component{
 		document.querySelector('body').style.backgroundColor = "white";
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
 		const asnReturn = this.state.filteredAsns.map((aASN,index)=>{
-			return( <Panel id="collapsible-panel-example-3">
+			return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
 									<h4 style={{color: "#01a2ff"}}>#{aASN.asn}</h4>
@@ -108,14 +112,17 @@ class RecieveASN extends Component{
 										</thead>
 										<tbody>
 				{aASN.serials.map((aSerial, index)=>{
-
+		
 					return(
-						<tr>
+						<tr key={aASN.asn + aSerial.serial}> 
 							<td style={{textAlign: "center"}}>
+							<label htmlFor={aASN.asn + aSerial.serial}>
+							<i className="far fa-square" data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+
 						<input id={aASN.asn + aSerial.serial}
+						style={{display: "none"}}
 						type="checkbox"
 						value={aSerial.serial}
-						onChange={()=>this.onChange(aASN.asn + aSerial.serial)}
 						/>  
 						</td>
 						<td>{aSerial.serial}</td>
