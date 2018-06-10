@@ -76,6 +76,7 @@ formatSerialStatus = (product) => {
 
 
 	render() {
+
 		if (!this.props.isAuth) this.props.props.history.push('/');
 		document.querySelector('body').style.backgroundColor = "white";
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
@@ -89,9 +90,9 @@ formatSerialStatus = (product) => {
 									<Panel.Toggle style={{cursor: "pointer"}}	componentClass="a">Details</Panel.Toggle>
 									</div>
 								</Panel.Title>
-								Expected Arrival Time: {this.formatAMPM(aASN.expectedArrivalTime)}
+								Expected Arrival Time: {this.formatAMPM(aASN.expectedArrivalTime)} {this.formatDate(aASN.expectedArrivalDate)}
 								<br />
-								Expected Arrival Date: {this.formatDate(aASN.expectedArrivalDate)}
+								Dock door: {aASN.dockDoor}
 								<br />
 								Status: <span className="asn-status">{this.formatStatus(aASN.status)}</span>
 								<br />
@@ -108,8 +109,7 @@ formatSerialStatus = (product) => {
 										</thead>
 										<tbody>
                    {aASN.serials.map((aSerial, index)=>{
-										 console.log(aSerial)
-														 			return (<tr>
+														 			return (<tr key={aASN.asn + aSerial.serial}>
 																		 <td>{aSerial.serial}</td>
 																		 <td>{this.formatSerialStatus(aSerial)}</td>
 																	 </tr>)	 

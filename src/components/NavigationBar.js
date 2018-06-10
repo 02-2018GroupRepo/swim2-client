@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 class NavigationBar extends Component{
 
   constructor(props) {
-    console.log(props);
     super(props);
     this.state = {
       isAuth: this.props.isAuth

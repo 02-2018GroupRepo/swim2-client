@@ -165,3 +165,7 @@ h1 {
   justify-content: flex-end;
 }
 
+label i:hover {
+  cursor: pointer;
+}
+

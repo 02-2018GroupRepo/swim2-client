@@ -38,7 +38,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.dockdoorSelection)
     return (
              <Router>
                <React.Fragment>
