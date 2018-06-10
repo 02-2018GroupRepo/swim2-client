@@ -39,6 +39,10 @@ constructor(props){
   }
 
   render() {
+
+    //redirect if not logged in
+		if (!this.props.isAuth) this.props.props.history.push('/');
+
   	const doorNumber =this.state.dockdoor.map((aDoor, index)=>{
   		return (
        

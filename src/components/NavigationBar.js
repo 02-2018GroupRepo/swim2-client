@@ -29,7 +29,7 @@ class NavigationBar extends Component{
   }
 
   _logout = () => {
-    localStorage.setItem('token', "");
+    localStorage.removeItem('role');
     this.props._isAuthHandler(false);
     this.setState({
       isAuth: false

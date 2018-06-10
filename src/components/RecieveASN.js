@@ -101,6 +101,10 @@ class RecieveASN extends Component{
 
 
 	render() {
+
+		//redirect if not logged in
+		if (!this.props.isAuth) this.props.props.history.push('/');
+
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
 		const tableDataStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", color: "rgba(77, 80, 85, 0.843)"};
 		const tableHeaderCheckBoxStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", width: "6%", color: "rgba(77, 80, 85, 0.843)"};

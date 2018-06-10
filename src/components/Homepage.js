@@ -76,6 +76,7 @@ formatSerialStatus = (product) => {
 
 
 	render() {
+		if (!this.props.isAuth) this.props.props.history.push('/');
 		document.querySelector('body').style.backgroundColor = "white";
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
 

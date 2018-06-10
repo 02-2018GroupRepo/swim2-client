@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import { url } from '../config';
+import swal from 'sweetalert';
 import './login.css';
 
 class Login extends Component{
@@ -24,19 +25,20 @@ class Login extends Component{
     });
 
         loginRequest.then((loginData)=>{
-            console.log(loginData);
-           if (loginData.data.role !== "invalid" || loginData.data.role !== "user does not exist"){
+           if (loginData.data.role !== "invalid" && loginData.data.role !== "user does not exist"){
               localStorage.setItem('role', loginData.data.role);
               this.props._isAuthHandler();
               this.props.props.history.push('/homepage');
-          } else {
-            alert("invalid password");
-        }
-    }).catch(e => console.log(e));
+          } else if (loginData.data.role === "invalid") {
+            swal("Invalid password", "", "error");
+        } else swal("User does not exist", "", "error");
+    }).catch(e => swal("Error", "Please try again", "error"));
 
     }
 
     render(){
+       
+       if (this.props.props.isAuth) this.props.props.history.push('/homepage');
 
        const h1Styles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "36px"};
        const paragraphStyles = {color: "rgba(77, 80, 85, 0.842)", textAlign: "center", fontFamily: "'Russo One', sans-serif", fontSize: "15px"}    
@@ -50,10 +52,10 @@ class Login extends Component{
           <p style={paragraphStyles}>Integrated Warehouse Management System</p>
           <form onSubmit ={this.handlelogin} className="sign-in">
           <div className="email">
-          <input type="text" placeholder="Email" className ="form-control" id ="username"/>
+          <input type="text" placeholder="Username" className ="form-control" id ="username" required />
           </div>
           <div className ="password">
-          <input type="password" placeholder="Password" className ="form-control" id ="password"/>
+          <input type="password" placeholder="Password" className ="form-control" id ="password" required />
           </div>
           <button type="submit">Log in</button>
           <div className ="signup">
