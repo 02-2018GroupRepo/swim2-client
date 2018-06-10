@@ -110,9 +110,9 @@ class Outbound extends Component{
 		const tableHeaderStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", color: "rgba(77, 80, 85, 0.843)"};
 		const noResultsStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "30px", color: "rgba(77, 80, 85, 0.843)", textAlign: "center", marginTop: "75px"};
 
-		let serialAsnIdArr = [];
 		let filteredAsnsByStatus = this.state.filteredAsns.filter(asn => asn.status === 'received');
 		let asnReturn = filteredAsnsByStatus.map((aASN,index)=>{
+			let serialAsnIdArr = [];
 			return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
