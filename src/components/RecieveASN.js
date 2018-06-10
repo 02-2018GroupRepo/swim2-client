@@ -139,6 +139,28 @@ class RecieveASN extends Component{
 										<tbody>
 				{aASN.serials.map((aSerial, index)=>{
 					serialAsnIdArr.push(aASN.asn + aSerial.serial);
+
+					if (aSerial.received) {
+						return(
+							<tr key={aASN.asn + aSerial.serial}> 
+								<td style={{textAlign: "center"}}>
+								<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
+								<i className="far fa-check-square" style={{color:"rgb(11,170,107)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+	
+							<input id={aASN.asn + aSerial.serial}
+							style={{display: "none"}}
+							type="checkbox"
+							value={aSerial.serial}
+							checked="true"
+							/>  
+							</td>
+							<td style={tableDataStyle}>{aSerial.serial}</td>
+							</tr>
+							)
+					}
+					else {
+
+					
 					return(
 						<tr key={aASN.asn + aSerial.serial}> 
 							<td style={{textAlign: "center"}}>
@@ -154,6 +176,7 @@ class RecieveASN extends Component{
 						<td style={tableDataStyle}>{aSerial.serial}</td>
 						</tr>
 						)
+					}
 				})
 			}
 			</tbody>

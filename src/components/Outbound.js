@@ -113,6 +113,9 @@ class Outbound extends Component{
 		let filteredAsnsByStatus = this.state.filteredAsns.filter(asn => asn.status === 'received');
 		let asnReturn = filteredAsnsByStatus.map((aASN,index)=>{
 			let serialAsnIdArr = [];
+
+
+
 			return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
@@ -135,21 +138,40 @@ class Outbound extends Component{
 										<tbody>
 				{aASN.serials.map((aSerial, index)=>{
 					serialAsnIdArr.push(aASN.asn + aSerial.serial);
-					return(
-						<tr key={aASN.asn + aSerial.serial}> 
-							<td style={{textAlign: "center"}}>
-							<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
-							<i className="far fa-square" style={{color:"rgb(108, 110, 114)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
-
-						<input id={aASN.asn + aSerial.serial}
-						style={{display: "none"}}
-						type="checkbox"
-						value={aSerial.serial}
-						/>  
-						</td>
-						<td style={tableDataStyle}>{aSerial.serial}</td>
-						</tr>
-						)
+					if (aSerial.delivered) {
+						return(
+							<tr key={aASN.asn + aSerial.serial}> 
+								<td style={{textAlign: "center"}}>
+								<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
+								<i className="far fa-check-square" style={{color:"rgb(11,170,107)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+	
+							<input id={aASN.asn + aSerial.serial}
+							style={{display: "none"}}
+							type="checkbox"
+							value={aSerial.serial}
+							checked="true"
+							/>  
+							</td>
+							<td style={tableDataStyle}>{aSerial.serial}</td>
+							</tr>
+							)
+					} else {
+						return(
+							<tr key={aASN.asn + aSerial.serial}> 
+								<td style={{textAlign: "center"}}>
+								<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
+								<i className="far fa-square" style={{color:"rgb(108, 110, 114)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+	
+							<input id={aASN.asn + aSerial.serial}
+							style={{display: "none"}}
+							type="checkbox"
+							value={aSerial.serial}
+							/>  
+							</td>
+							<td style={tableDataStyle}>{aSerial.serial}</td>
+							</tr>
+							)
+					}
 				})
 			}
 			</tbody>
