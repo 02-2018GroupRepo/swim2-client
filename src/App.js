@@ -38,19 +38,18 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.dockdoorSelection)
     return (
              <Router>
                <React.Fragment>
-             <Route path='/'  component={(props) => props.location.pathname !== "/login" && <Header isAuth={this.state.isAuth} />} />  
+             <Route path='/'  component={(props) => this.state.isAuth && <Header isAuth={this.state.isAuth} />} />  
              <div className ="container">
-             <Route path='/login' component={(props) => <Login props={props} _isAuthHandler={this._isAuthHandler} /> }/>
+             <Route exact path='/' component={(props) => !this.state.isAuth && <Login props={props} _isAuthHandler={this._isAuthHandler} isAuth={this.state.isAuth} /> }/>
               {/* <Route path='/signup' component={(props) => <SignUp props={props} _isAuthHandler={this._isAuthHandler} />} /> */}
-              <Route path='/homepage'  component={Homepage} />
+              <Route path='/homepage'  component={(props) => <Homepage props={props} isAuth={this.state.isAuth} />} />
               
-              <Route path='/dockdoor' component={() => <DockdoorModal _dropdownHandler={this._dropdownHandler} selection={this.state.dockdoorSelection} />} />
-                <Route path='/recieveasn' component={() => <RecieveASN  dockdoor={this.state.dockdoorSelection} />} />
-                <Route path='/outbound' component={() => <Outbound />} />
+              <Route path='/dockdoor' component={(props) => <DockdoorModal props={props} _dropdownHandler={this._dropdownHandler} selection={this.state.dockdoorSelection} isAuth={this.state.isAuth} />} />
+              <Route path='/recieveasn' component={(props) => <RecieveASN  props={props} dockdoor={this.state.dockdoorSelection} isAuth={this.state.isAuth} />} />
+              <Route path='/outbound' component={(props) => <Outbound props={props} isAuth={this.state.isAuth} />} />
 
               
 

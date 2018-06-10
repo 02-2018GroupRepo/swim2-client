@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
+import swal from 'sweetalert';
 import { Modal, Button, DropdownButton, MenuItem } from 'react-bootstrap';
 
 import { url } from '../config';
@@ -31,6 +32,14 @@ constructor(props){
 			}
 			)
   }
+
+  handleFormSubmit = () => {
+    if (this.state.dockdoor.includes(this.props.selection)) {
+      this.props.props.history.push('/recieveasn');
+    } else {
+      swal("Error", "Please select a dock door", "error");
+    }
+  }
   
   moveDropDownMenu = () => {
     const e = document.getElementsByClassName('dropdown-menu')[0];
@@ -39,10 +48,14 @@ constructor(props){
   }
 
   render() {
-  	const doorNumber =this.state.dockdoor.map((aDoor, index)=>{
+
+    //redirect if not logged in
+		if (!this.props.isAuth) this.props.props.history.push('/');
+
+  	const doorNumber = this.state.dockdoor.map((aDoor, index)=>{
   		return (
        
-                     <MenuItem eventKey="1" onClick={()=>this.props._dropdownHandler(aDoor)}>{aDoor}</MenuItem>
+                     <MenuItem key={aDoor} eventKey="1" onClick={()=>this.props._dropdownHandler(aDoor)}>{aDoor}</MenuItem>
                    )
 
   	})
@@ -64,8 +77,8 @@ constructor(props){
 
                    <Modal.Footer>
                         <Link to="/homepage"><Button style={{marginRight: "10px"}} className="btn btn-danger">Cancel</Button></Link>
-                          <Link to="/recieveasn" ><Button className="btn btn-success">Submit</Button></Link>
-                        
+                          {/* <Link to="/recieveasn"><Button className="btn btn-success">Submit</Button></Link> */}
+                          <Button className="btn btn-success" onClick={this.handleFormSubmit}>Submit</Button>
                    </Modal.Footer>
                  </Modal.Dialog>
             </div>          

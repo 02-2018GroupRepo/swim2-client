@@ -12,7 +12,8 @@ class Outbound extends Component{
 		this.state ={
 			asns: [],
 			dockdoor: undefined,
-			filteredAsns: []
+			filteredAsns: [],
+			firstLoad: true
 		}
 	}
 
@@ -24,12 +25,14 @@ class Outbound extends Component{
 			(data) => {  
 				this.setState({
 					asns: data,
-					filteredAsns: data
+					filteredAsns: data,
+					firstLoad: false
 				});
 			},
 			(error) => {
 				this.setState({
-					asns: []
+					asns: [],
+					firstLoad: false
 				})
 			}
 			)
@@ -97,12 +100,22 @@ class Outbound extends Component{
 
 
 	render() {
+		//redirect if not logged in
+		if (!this.props.isAuth) this.props.props.history.push('/');
+
+		//element styles
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
 		const tableDataStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", color: "rgba(77, 80, 85, 0.843)"};
 		const tableHeaderCheckBoxStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", width: "6%", color: "rgba(77, 80, 85, 0.843)"};
 		const tableHeaderStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "18px", color: "rgba(77, 80, 85, 0.843)"};
-		let serialAsnIdArr = [];
-		const asnReturn = this.state.filteredAsns.filter(asn => asn.status === 'received').map((aASN,index)=>{
+		const noResultsStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "30px", color: "rgba(77, 80, 85, 0.843)", textAlign: "center", marginTop: "75px"};
+
+		let filteredAsnsByStatus = this.state.filteredAsns.filter(asn => asn.status === 'received');
+		let asnReturn = filteredAsnsByStatus.map((aASN,index)=>{
+			let serialAsnIdArr = [];
+
+
+
 			return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 				<Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
@@ -125,21 +138,40 @@ class Outbound extends Component{
 										<tbody>
 				{aASN.serials.map((aSerial, index)=>{
 					serialAsnIdArr.push(aASN.asn + aSerial.serial);
-					return(
-						<tr key={aASN.asn + aSerial.serial}> 
-							<td style={{textAlign: "center"}}>
-							<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
-							<i className="far fa-square" style={{color:"rgb(108, 110, 114)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
-
-						<input id={aASN.asn + aSerial.serial}
-						style={{display: "none"}}
-						type="checkbox"
-						value={aSerial.serial}
-						/>  
-						</td>
-						<td style={tableDataStyle}>{aSerial.serial}</td>
-						</tr>
-						)
+					if (aSerial.delivered) {
+						return(
+							<tr key={aASN.asn + aSerial.serial}> 
+								<td style={{textAlign: "center"}}>
+								<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
+								<i className="far fa-check-square" style={{color:"rgb(11,170,107)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+	
+							<input id={aASN.asn + aSerial.serial}
+							style={{display: "none"}}
+							type="checkbox"
+							value={aSerial.serial}
+							checked="true"
+							/>  
+							</td>
+							<td style={tableDataStyle}>{aSerial.serial}</td>
+							</tr>
+							)
+					} else {
+						return(
+							<tr key={aASN.asn + aSerial.serial}> 
+								<td style={{textAlign: "center"}}>
+								<label style={{margin: "0px"}} htmlFor={aASN.asn + aSerial.serial}>
+								<i className="far fa-square" style={{color:"rgb(108, 110, 114)", fontSize: "24px"}} data-checkbox={aASN.asn + aSerial.serial} onClick={()=>this.onChange(aASN.asn + aSerial.serial)}></i></label>
+	
+							<input id={aASN.asn + aSerial.serial}
+							style={{display: "none"}}
+							type="checkbox"
+							value={aSerial.serial}
+							/>  
+							</td>
+							<td style={tableDataStyle}>{aSerial.serial}</td>
+							</tr>
+							)
+					}
 				})
 			}
 			</tbody>
@@ -154,7 +186,11 @@ class Outbound extends Component{
 			</Panel.Collapse>
 			</Panel>
 			)
-		})            
+		})
+		
+		if (this.state.firstLoad) asnReturn = (<h1 style={noResultsStyle}>Loading...</h1>)
+		else if (filteredAsnsByStatus.length === 0) asnReturn = (<h1 style={noResultsStyle}>No Results</h1>)
+		
 		return (                            
 			<div className="container-home">
 			<Searchbar _searchBarHandler={this._searchBarHandler} />
