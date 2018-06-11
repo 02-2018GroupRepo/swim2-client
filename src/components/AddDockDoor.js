@@ -24,19 +24,6 @@ constructor(props){
     });
 }
 
-//   handleFormSubmit = () => {
-//     if (this.state.dockdoor.includes(this.props.selection)) {
-//       this.props.props.history.push('/recieveasn');
-//     } else {
-//       swal("Error", "Please select a dock door", "error");
-//     }
-//   }
-  
-//   moveDropDownMenu = () => {
-//     const e = document.getElementsByClassName('dropdown-menu')[0];
-//     e.style.left = "-220px";
-//     e.style.width = "220px";
-//   }
 
   render() {
 
