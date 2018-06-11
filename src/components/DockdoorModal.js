@@ -32,11 +32,10 @@ constructor(props){
 			}
 			)
   }
-  deleteSubmission = () =>{
-         const dockdoordeleting = this.props.selection
-         console.log(dockdoordeleting)
+  deleteSubmission = () => {
+        const dockdoordeleting = this.props.selection;
+        this.props._dropdownHandler("");
         const addingRequest = axios({
-
           method: "POST",
           url: `${url}/api/delete/dockdoor/${dockdoordeleting}`,
           
