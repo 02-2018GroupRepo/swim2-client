@@ -32,7 +32,9 @@ constructor(props){
 			}
 			)
   }
-  
+ 
+
+
 
   handleFormSubmit = () => {
     if (this.state.dockdoor.includes(this.props.selection)) {
@@ -80,6 +82,7 @@ constructor(props){
                         <Link to="/homepage"><Button style={{marginRight: "10px"}} className="btn btn-danger">Cancel</Button></Link>
                           {/* <Link to="/recieveasn"><Button className="btn btn-success">Submit</Button></Link> */}
                           <Button className="btn btn-success" onClick={this.handleFormSubmit}>Submit</Button>
+
                           
                    </Modal.Footer>
                  </Modal.Dialog>
