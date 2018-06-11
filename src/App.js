@@ -51,7 +51,7 @@ class App extends Component {
               <Route path='/dockdoor' component={(props) => <DockdoorModal props={props} _dropdownHandler={this._dropdownHandler} selection={this.state.dockdoorSelection} isAuth={this.state.isAuth} />} />
               <Route path='/recieveasn' component={(props) => <RecieveASN  props={props} dockdoor={this.state.dockdoorSelection} isAuth={this.state.isAuth} />} />
               <Route path='/outbound' component={(props) => <Outbound props={props} isAuth={this.state.isAuth} />} />
-              <Route path='/adddockdoor' component={(props) => <AddDockDoor props={props} isAuth={this.state.isAuth} />} />
+              <Route path='/adddockdoor' component={(props) => !this.state.isAuth && <AddDockDoor props={props} isAuth={this.state.isAuth} />} />
 
               
 

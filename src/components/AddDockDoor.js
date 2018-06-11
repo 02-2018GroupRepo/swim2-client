@@ -49,6 +49,7 @@ constructor(props){
                         <Link to="/homepage"><Button style={{marginRight: "10px"}} className="btn btn-danger">Cancel</Button></Link>
                           {/* <Link to="/recieveasn"><Button className="btn btn-success">Submit</Button></Link> */}
                       <Link to ="/homepage"><Button className="btn btn-success" onClick={this.formSubmission} >Submit</Button></Link>
+                            
                    </Modal.Footer>
                  </Modal.Dialog>
             </div>          
