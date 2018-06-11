@@ -27,7 +27,7 @@
 
 .navLinks div {
 	float: right;
-	margin-right: 15%;
+	margin-right: 8%;
 	width: 100%;
 } 
 
@@ -75,7 +75,7 @@
 	display: none;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1050px) {
 
 	.header-logo h1 {
 		display: none;
@@ -96,8 +96,8 @@
 	}
 
 	.mobile-dropdown {
-		margin-top: -15px;
-		height: 100px;
+		margin-top: -30px;
+		height: 145px;
 		background-color: white;
 		box-shadow: 0 7px 20px -5px rgba(0,0,0,0.2);
 		margin-bottom: 20px;
