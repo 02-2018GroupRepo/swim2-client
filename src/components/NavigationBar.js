@@ -14,8 +14,10 @@ class NavigationBar extends Component{
   _isAuthorized() {
     if (this.state.isAuth) {
       return (<React.Fragment> 
+        <Link to="/adddockdoor">Add Dock Door</Link>
         <Link to="/dockdoor">Receiving</Link>
         <Link to="/outbound">Outbound</Link>
+
         <Link to="/" onClick={this._logout}>Logout</Link>
 
         </React.Fragment>)
