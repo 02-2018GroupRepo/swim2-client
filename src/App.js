@@ -18,7 +18,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isAuth: false,
+      isAuth: localStorage.getItem("role") === "admin" || localStorage.getItem("role") === "user",
       dockdoorSelection: undefined
     }
   }

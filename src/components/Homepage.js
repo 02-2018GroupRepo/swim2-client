@@ -11,6 +11,7 @@ class Homepage extends Component{
 		this.state ={
 			asns: [],
 			filteredAsns: [],
+			firstLoad: true
 			
 
 		}
@@ -24,12 +25,14 @@ class Homepage extends Component{
            (data) => {  
              this.setState({
 								 asns: data,
-								 filteredAsns: data
+								 filteredAsns: data,
+								 firstLoad: false
               });
             },
             (error) => {
               this.setState({
-                asns: []
+				asns: [],
+				firstLoad: false
               })
             }
           ) 
@@ -80,8 +83,9 @@ formatSerialStatus = (product) => {
 		if (!this.props.isAuth) this.props.props.history.push('/');
 		document.querySelector('body').style.backgroundColor = "white";
 		const panelTitleStyles = {color: "rgba(77, 80, 85, 0.843)", display: "flex", justifyContent: "space-between", alignItems:"center"};
+		const noResultsStyle = {fontFamily:'"Russo One", sans-serif', fontSize: "30px", color: "rgba(77, 80, 85, 0.843)", textAlign: "center", marginTop: "75px"};
 
-	   const asnReturn = this.state.filteredAsns.map((aASN,index)=>{
+	   let asnReturn = this.state.filteredAsns.map((aASN,index)=>{
 		          return( <Panel id="collapsible-panel-example-3" key={aASN.asn}>
 		          <Panel.Heading style={{fontFamily: '"Russo One", sans-serif', color:"rgba(77, 80, 85, 0.843)"}}>
 		            <Panel.Title style={panelTitleStyles}>
@@ -120,7 +124,10 @@ formatSerialStatus = (product) => {
 		          </Panel.Collapse>
 		          </Panel>)
 	      
-	     })
+		 })
+		 
+		 if (this.state.firstLoad) asnReturn = (<h1 style={noResultsStyle}>Loading...</h1>)
+		 else if (this.state.filteredAsns.length === 0) asnReturn = (<h1 style={noResultsStyle}>No Results</h1>)
 
           
 		    return (
