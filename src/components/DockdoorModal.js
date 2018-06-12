@@ -40,6 +40,8 @@ constructor(props){
           method: "POST",
           url: `${url}/api/delete/dockdoor/${dockdoordeleting}`,
         });
+        //this.props.props.history.push('/homepage');
+        swal("Dock Door Deleted", "", "success")
         this.props.props.history.push('/homepage');
     } else {
       swal("Error", "Please select a dock door", "error");

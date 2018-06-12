@@ -21,6 +21,7 @@ constructor(props){
             method: "POST",
             url: `${url}/api/create/dockdoor/${dockdooradding}`,
       });
+            swal("Dock Door Added", "", "success")
       this.props.props.history.push('/homepage')
     } else {
       swal("Error", "Please enter a valid dock door id", "error");
