@@ -15,12 +15,10 @@ constructor(props){
    }
   formSubmission(){
 		     const dockdooradding = document.getElementById("dockdooradding").value
-         console.log(dockdooradding)
-        const addingRequest = axios({
+         const addingRequest = axios({
 
           method: "POST",
           url: `${url}/api/create/dockdoor/${dockdooradding}`,
-          
     });
 }
 
@@ -35,12 +33,12 @@ constructor(props){
              <div className="static-modal">
                  <Modal.Dialog id="modal-dialog-margin">
                    <Modal.Header id="dockdoor-modal-header">
-                         <Modal.Title>Please type how many dock door you want to add?</Modal.Title>
+                         <Modal.Title>Please enter a dock door id</Modal.Title>
                    </Modal.Header>
 
                    <Modal.Body>
                    <div className="dockdooradding">
-                      <input type="text" placeholder="Number Of Dock Door" className ="form-control" id ="dockdooradding" required />
+                      <input type="text" placeholder="Dock Door Id" className ="form-control" id ="dockdooradding" required />
                          </div>
                     
                    </Modal.Body>
