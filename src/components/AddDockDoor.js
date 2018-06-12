@@ -9,17 +9,22 @@ import { url } from '../config';
 
 class AddDockDoor extends Component{
 constructor(props){
+  console.log(props);
 		super(props);
 		
 	
    }
-  formSubmission(){
-		     const dockdooradding = document.getElementById("dockdooradding").value
-         const addingRequest = axios({
-
-          method: "POST",
-          url: `${url}/api/create/dockdoor/${dockdooradding}`,
-    });
+  formSubmission = () => {
+         const dockdooradding = document.getElementById("dockdooradding").value
+         if (dockdooradding !== "" && String(Number(dockdooradding)) !== "NaN") {
+           const addingRequest = axios({
+            method: "POST",
+            url: `${url}/api/create/dockdoor/${dockdooradding}`,
+      });
+      this.props.props.history.push('/homepage')
+    } else {
+      swal("Error", "Please enter a valid dock door id", "error");
+    }
 }
 
 
@@ -46,7 +51,7 @@ constructor(props){
                    <Modal.Footer>
                         <Link to="/homepage"><Button style={{marginRight: "10px"}} className="btn btn-danger">Cancel</Button></Link>
                           {/* <Link to="/recieveasn"><Button className="btn btn-success">Submit</Button></Link> */}
-                      <Link to ="/homepage"><Button className="btn btn-success" onClick={this.formSubmission} >Submit</Button></Link>
+                      <Button className="btn btn-success" onClick={this.formSubmission} >Submit</Button>
                             
                    </Modal.Footer>
                  </Modal.Dialog>
