@@ -16,7 +16,9 @@ constructor(props){
 		}
 	
   }
+
   componentDidMount(){
+    
 		axios.get(`${url}/dockdoor/get`)
 		.then(res => res.data)
 		.then(
