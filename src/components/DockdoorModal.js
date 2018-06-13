@@ -38,7 +38,7 @@ constructor(props){
     if (this.state.dockdoor.includes(this.props.selection)) {
         const dockdoordeleting = this.props.selection;
         this.props._dropdownHandler("");
-        const addingRequest = axios({
+        const deletingRequest = axios({
           method: "POST",
           url: `${url}/api/delete/dockdoor/${dockdoordeleting}`,
         });
